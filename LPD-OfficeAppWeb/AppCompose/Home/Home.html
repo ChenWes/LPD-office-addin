@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title></title>
+    <title>Esquel Style Library</title>
     <script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
 
     <link href="../../Content/Office.css" rel="stylesheet" type="text/css" />
@@ -18,24 +18,140 @@
 
     <link href="Home.css" rel="stylesheet" type="text/css" />
     <script src="Home.js" type="text/javascript"></script>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="../../Scripts/normalize.css">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.css'>
+    <link rel="stylesheet" href="../../Scripts/style.css">
+
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+    <script src='https://cdn.rawgit.com/sroze/ngInfiniteScroll/master/build/ng-infinite-scroll.js'></script>
+    <script src='../../Scripts/angulargrid.js'></script>
+
+    <script src="index.js"></script>
+    <script src="../../Scripts/xml2json.js" type="text/javascript" charset="UTF-8"></script>
 </head>
 <body>
-    <div id="content-header">
+    <div id="content-main" ng-app="ngapp" ng-controller="MainCtrl as vm" ng-cloak="">
         <div class="padding">
-            <h1>Welcome</h1>
-        </div>
-    </div>
-    <div id="content-main">
-        <div class="padding">
-            <p><strong>在此处添加主屏幕内容。</strong></p>
-            <p>例如:</p>
-            <button id="set-subject">设置主题</button><button id="get-subject">获取主题</button>
-            <button id="add-to-recipients">将您自己添加到收件人列表</button>
+            <div layout="column">
+                <md-toolbar class="md-whiteframe-z2">
+                    <div class="md-toolbar-tools">
+                        <button class="md-button md-icon-button">
+                            <md-icon>
+                                <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+                                </svg>
+                            </md-icon>
+                        </button>
+                        <h2>
+                            <span>Esquel Style Library</span>
+                        </h2>
+                    </div>
+                </md-toolbar>
 
-            <p style="margin-top: 50px;">
-                <a target="_blank" href="https://go.microsoft.com/fwlink/?LinkId=276814">联机查找更多示例...</a>
-            </p>
+                <md-content id="content-scroller" layout="row">
+                    <div>
+                        <p>
+                        <md-input-container>
+                            <label>Yarn Count Weft:</label>
+                            <!--<input ng-model="SearchInfo.yarnWeft">-->
+                            <md-select ng-model="SearchInfo.yarnWeft">
+                                <md-option ng-repeat="yarn in yarns track by yarn.id" value="{{yarn.id}}">{{yarn.lable}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Yarn Count Wrap:</label>
+                            <md-select ng-model="SearchInfo.yarnWrap">
+                                <md-option ng-repeat="yarn in yarns track by yarn.id" value="{{yarn.id}}">{{yarn.lable}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        </p>
+                        <md-input-container>
+                            <label>Combo name:</label>
+                            <input ng-model="SearchInfo.comboName">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Fabric ID:</label>
+                            <input ng-model="SearchInfo.fabricID">
+                        </md-input-container>
+                        <p>
+                        <md-button class="md-raised md-primary" ng-click="vm.doSearch()" flex-gt-sm>Search</md-button>
+                        </p>
+                </md-content>
+            </div>
         </div>
-    </div>
+
+        <md-content id="content-scroller" class="md-padding">
+            <div>
+                <div angular-grid="vm.shots"
+                     ag-grid-width="135"
+                     ag-gutter-size="5"
+                     ag-id="shots">
+                    <md-card ng-repeat="shot in vm.shots track by $index">
+                        <img ng-src="{{::shot.thumbnail_url}}" class="md-card-image" alt="Washed Out" />
+                        <md-card-title>
+                            <md-card-title-text>
+                                <h3>{{::shot.code}}</h3>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <p>
+                            <div class="description">{{shot.desc}}</div>
+                            <div class="description">{{shot.fabrication}}</div>
+                            <div class="description">{{shot.dye_method}}</div>
+                            </p>
+                        </md-card-content>
+                        <md-card-actions layout="column" layout-align="start">
+                            <md-button ng-click="vm.doCopyContent($index)">Attach to Email</md-button>
+                        </md-card-actions>
+                        <!-- Contents for attached. -->
+                        <div class="hide" ng-attr-id="{{'dv_' + $index}}">
+                            <p>
+                                <table>
+                                    <tr>
+                                        <td rowspan="2">
+                                            <img ng-src="{{::shot.thumbnail_url}}" height="128" width="128" />
+                                        </td>
+                                        <td style="padding:5px" valign="top">
+                                            <h3>{{::shot.code}}</h3>
+                                            <span ng-bind-html="::shot.desc | unsafe"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:5px" valign="top">
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.sub_category | unsafe"></div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.status | unsafe"></div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.category | unsafe"></div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.fabrication | unsafe"></div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.dye_method | unsafe"></div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.finishing | unsafe"></div>
+                                            <div style="{{attrCSS}}">Fabric Width: {{shot.fabric_width}}</div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.content | unsafe"></div>
+                                            <div style="{{attrCSS}}">Yarn Count Wrap:{{shot.yarn_count_wrap}} Weft:{{shot.yarn_count_weft}}</div>
+                                            <div style="{{attrCSS}}">Density Wrap:{{shot.density_wrap}} Weft:{{shot.density_weft}}</div>
+                                            <div style="{{attrCSS}}" ng-bind-html="::shot.handfeel | unsafe"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </p>
+                        </div>
+                    </md-card>
+                </div>
+            </div>
+        </md-content>
+        <div id="content-footer">
+            <div class="padding">
+                powered by Esquel LPD
+            </div>
+        </div>
 </body>
 </html>

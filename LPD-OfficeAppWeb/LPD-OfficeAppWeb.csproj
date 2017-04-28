@@ -71,21 +71,27 @@
     <Content Include="AppCompose\Home\Home.css" />
     <Content Include="AppCompose\Home\Home.html" />
     <Content Include="AppCompose\Home\Home.js" />
+    <Content Include="AppCompose\Home\index.js" />
     <Content Include="AppRead\App.css" />
     <Content Include="AppRead\App.js" />
     <Content Include="AppRead\Home\Home.css" />
     <Content Include="AppRead\Home\Home.html" />
     <Content Include="AppRead\Home\Home.js" />
+    <Content Include="AppRead\Home\index.js" />
     <Content Include="Content\Office.css" />
     <Content Include="Images\Close.png" />
+    <Content Include="Images\logo-64.png" />
+    <Content Include="Images\logo-128.png" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\angulargrid.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\_references.js" />
     <None Include="Scripts\Office\1\office-vsdoc.js" />
     <Content Include="Content\OfficeThemes.css" />
+    <Content Include="Scripts\normalize.css" />
     <Content Include="Scripts\Office\1\access-web-16.00.debug.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.js" />
     <Content Include="Scripts\Office\1\ar-sa\office_strings.debug.js" />
@@ -340,6 +346,8 @@
     <Content Include="Scripts\Office\metadata\endpoints.xml" />
     <Content Include="Scripts\Office\metadata\features.xml" />
     <Content Include="Scripts\Office\MicrosoftAjax.js" />
+    <Content Include="Scripts\style.css" />
+    <Content Include="Scripts\xml2json.js" />
     <Content Include="Scripts\_officeintellisense.js" />
     <Content Include="Web.config" />
   </ItemGroup>
