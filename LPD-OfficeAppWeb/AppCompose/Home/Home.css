@@ -1,0 +1,16 @@
+﻿/* 特定于页面的样式 */
+
+/* 示例按钮格式设置 */
+
+#set-subject {
+    width: 100px;
+    margin-right: 5px;
+}
+
+#get-subject {
+    width: 100px;
+}
+
+#add-to-recipients {
+    width: 205px;
+}
